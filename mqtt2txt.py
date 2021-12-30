@@ -50,7 +50,7 @@ class RollingFileProcessor:
         return False
 
     def render_data_internal(self, now, str_data):
-        ts = now.strftime('%Y-%m-%d %H:%M:%S ')
+        ts = now.strftime('%Y-%m-%d %H:%M:%S,')
         self._file_handle.write(ts + str_data + '\n')
 
     def render_data(self, str_data):
