@@ -14,7 +14,7 @@ from datetime import datetime
 
 
 files = dict()
-files_path = '/home/vkozlov/'
+files_path = '/home/bmax/mqtt2txt'
 closing = False
 
 off_begin = "08:00:00"
