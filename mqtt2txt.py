@@ -16,6 +16,7 @@ from datetime import datetime
 files = dict()
 files_path = '/home/bmax/mqtt2txt'
 closing = False
+client = None
 
 off_begin = "08:00:00"
 off_end = "21:30:00"
@@ -38,7 +39,7 @@ class RollingFileProcessor:
 
     def prepare_file(self):
         """Checks whether we need to open a handle"""
-        file_name = datetime.now().strftime(self._prefix + '_%Y%m%d.txt')
+        file_name = datetime.now().strftime('%Y-%m-%d_' + self._prefix + '.txt')
         actual_file_name = os.path.join(self._file_path, file_name)
         if (actual_file_name != self._current_file_name):
             self.flush()
@@ -112,7 +113,8 @@ def close_all():
 
 
 def handler_stop_signals(signum, frame):
-    close_all()
+    if client is not None:
+        client.disconnect()
 
 
 Connected = False   # global variable for the state of the connection
@@ -127,7 +129,7 @@ client.on_message = on_message           # attach function to callback
 # client.on_disconnect= on_disconnect
 client.connect(broker_address, broker_port, 60)    # connect
 client.subscribe("I2S/rawRMS")  # subscribe
-
+client.subscribe("SPH0645/rawRMS")
 
 signal.signal(signal.SIGTERM, handler_stop_signals)
 
