@@ -19,7 +19,7 @@ closing = False
 client = None
 
 off_begin = "08:00:00"
-off_end = "21:30:00"
+off_end = "18:30:00"
 off_begin_t = datetime.strptime(off_begin, "%H:%M:%S")
 off_end_t = datetime.strptime(off_end, "%H:%M:%S")
 
@@ -46,7 +46,7 @@ class RollingFileProcessor:
             is_new = not Path(actual_file_name).exists()
             self._current_file_name = actual_file_name
             self._file_handle = open(actual_file_name, 'a')
-            # _LOGGER.debug('Opened file %s' % actual_file_name)
+            print('Opened file %s' % actual_file_name)
             return is_new
         return False
 
@@ -76,7 +76,7 @@ class RollingFileProcessor:
         if (self._file_handle is not None):
             self._file_handle.close()
             self._file_handle = None
-            # _LOGGER.debug('Closed file %s' % self._current_file_name)
+            print('Closed file %s' % self._current_file_name)
             self._current_file_name = None
 
 
@@ -97,12 +97,13 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, message):
-    # print("Message received: " + message.topic + " => "
-    # + str(message.payload, 'utf-8'))
+    #print("Message received: " + message.topic + " => " + str(message.payload, 'utf-8'))
     if not closing:
         processor = get_processor_for_topic(message.topic, files_path)
-        processor.execute(str(message.payload, 'utf-8'))
-
+        try:
+            processor.execute(str(message.payload, 'utf-8'))
+        except UnicodeDecodeError:
+            print('UnicodeDecodeError occurred')
 
 def close_all():
     global closing
@@ -130,6 +131,11 @@ client.on_message = on_message           # attach function to callback
 client.connect(broker_address, broker_port, 60)    # connect
 client.subscribe("I2S/rawRMS")  # subscribe
 client.subscribe("SPH0645/rawRMS")
+client.subscribe("INMP441/rawRMS")
+client.subscribe("3C71BF4822B8/rawRMS")
+client.subscribe("FLDT/rawRMS")
+client.subscribe("ACCEL2/WT31/rawAccX")
+client.subscribe("ACCEL2/WT31/rawAccY")
 
 signal.signal(signal.SIGTERM, handler_stop_signals)
 
@@ -141,3 +147,4 @@ except KeyboardInterrupt:
     pass
 finally:
     close_all()
+
