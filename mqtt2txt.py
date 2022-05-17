@@ -19,7 +19,7 @@ closing = False
 client = None
 
 off_begin = "08:00:00"
-off_end = "18:30:00"
+off_end = "10:30:00"
 off_begin_t = datetime.strptime(off_begin, "%H:%M:%S")
 off_end_t = datetime.strptime(off_end, "%H:%M:%S")
 
@@ -136,6 +136,15 @@ client.subscribe("3C71BF4822B8/rawRMS")
 client.subscribe("FLDT/rawRMS")
 client.subscribe("ACCEL2/WT31/rawAccX")
 client.subscribe("ACCEL2/WT31/rawAccY")
+client.subscribe("ACCEL2/WT31/rawAccZ")
+client.subscribe("MPU6500/MPU9250/rawAccX")
+client.subscribe("MPU6500/MPU9250/rawAccY")
+client.subscribe("MPU6500/MPU9250/rawAccZ")
+client.subscribe("ACCEL2/ICM20948/rawAccX")
+client.subscribe("ACCEL2/ICM20948/rawAccY")
+client.subscribe("ACCEL2/ICM20948/rawAccZ")
+client.subscribe("MR60/hrWave")
+client.subscribe("MR60/respWave")
 
 signal.signal(signal.SIGTERM, handler_stop_signals)
 
