@@ -129,34 +129,29 @@ client.on_connect = on_connect           # attach function to callback
 client.on_message = on_message           # attach function to callback
 # client.on_disconnect= on_disconnect
 client.connect(broker_address, broker_port, 60)    # connect
+
 client.subscribe("I2S/rawRMS")  # subscribe
 client.subscribe("I2S/v30000")
-client.subscribe("SPH0645/rawRMS")
-client.subscribe("SPH0645/v30000")
-client.subscribe("3C71BF4822B8/rawRMS")
-client.subscribe("3C71BF4822B8/v30000")
-client.subscribe("INMP441/rawRMS")
-client.subscribe("INMP441/v30000")
-client.subscribe("S2_I2S/rawRMS")
-client.subscribe("S2_I2S/v30000")
-client.subscribe("S3_Test/rawRMS")
-client.subscribe("S3_Test/v30000")
-client.subscribe("C3Mini/rawRMS")
-client.subscribe("C3Mini/v30000")
-client.subscribe("ACCEL2/WT31/rawAccX")
-client.subscribe("ACCEL2/WT31/rawAccY")
-client.subscribe("ACCEL2/WT31/rawAccZ")
+
+client.subscribe("MR60/rawRMS")
+client.subscribe("MR60/v30000")
+client.subscribe("MR60/radar/csv")
+
+client.subscribe("esp32snore/v30000")
+
 client.subscribe("MPU6500/MPU9250/rawAccX")
 client.subscribe("MPU6500/MPU9250/rawAccY")
 client.subscribe("MPU6500/MPU9250/rawAccZ")
+client.subscribe("MPU6500/MPU9250/rawGyrX")
+client.subscribe("MPU6500/MPU9250/rawGyrY")
+client.subscribe("MPU6500/MPU9250/rawGyrZ")
+
 client.subscribe("ACCEL2/ICM20948/rawAccX")
 client.subscribe("ACCEL2/ICM20948/rawAccY")
 client.subscribe("ACCEL2/ICM20948/rawAccZ")
 client.subscribe("ACCEL2/ICM20948/rawGyrX")
 client.subscribe("ACCEL2/ICM20948/rawGyrY")
 client.subscribe("ACCEL2/ICM20948/rawGyrZ")
-client.subscribe("MR60/hrWave")
-client.subscribe("MR60/respWave")
 
 signal.signal(signal.SIGTERM, handler_stop_signals)
 
