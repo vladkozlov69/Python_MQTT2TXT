@@ -10,7 +10,7 @@ After=mosquitto.service
 [Service]
 
 # Command to execute when the service is started
-ExecStart=python3 /usr/local/lib/mqtt2txt/mqtt2txt.py
+ExecStart=/usr/bin/python3 /usr/local/lib/mqtt2txt/mqtt2txt.py
 
 # Disable Python's buffering of STDOUT and STDERR, so that output from the
 # service shows up immediately in systemd's logs

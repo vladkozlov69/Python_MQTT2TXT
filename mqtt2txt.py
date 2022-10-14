@@ -19,7 +19,7 @@ closing = False
 client = None
 
 off_begin = "08:00:00"
-off_end = "10:30:00"
+off_end = "19:30:00"
 off_begin_t = datetime.strptime(off_begin, "%H:%M:%S")
 off_end_t = datetime.strptime(off_end, "%H:%M:%S")
 
@@ -137,21 +137,31 @@ client.subscribe("MR60/rawRMS")
 client.subscribe("MR60/v30000")
 client.subscribe("MR60/radar/csv")
 
+client.subscribe("Zero/v30000")
+client.subscribe("Zero/radar/csv")
+
 client.subscribe("esp32snore/v30000")
 
-client.subscribe("MPU6500/MPU9250/rawAccX")
-client.subscribe("MPU6500/MPU9250/rawAccY")
-client.subscribe("MPU6500/MPU9250/rawAccZ")
-client.subscribe("MPU6500/MPU9250/rawGyrX")
-client.subscribe("MPU6500/MPU9250/rawGyrY")
-client.subscribe("MPU6500/MPU9250/rawGyrZ")
+client.subscribe("TestWIT2/WT61/csv")
 
-client.subscribe("ACCEL2/ICM20948/rawAccX")
-client.subscribe("ACCEL2/ICM20948/rawAccY")
-client.subscribe("ACCEL2/ICM20948/rawAccZ")
-client.subscribe("ACCEL2/ICM20948/rawGyrX")
-client.subscribe("ACCEL2/ICM20948/rawGyrY")
-client.subscribe("ACCEL2/ICM20948/rawGyrZ")
+client.subscribe("S3_MPU6500/MPU6500/rawAccX")
+client.subscribe("S3_MPU6500/MPU6500/rawAccY")
+client.subscribe("S3_MPU6500/MPU6500/rawAccZ")
+client.subscribe("S3_MPU6500/MPU6500/rawGyrX")
+client.subscribe("S3_MPU6500/MPU6500/rawGyrY")
+client.subscribe("S3_MPU6500/MPU6500/rawGyrZ")
+client.subscribe("S3_MPU6500/MPU6500/csv")
+client.subscribe("S3_MPU6500/WT61/csv")
+
+client.subscribe("ADXL355/ADXL35X/rawAccX")
+client.subscribe("ADXL355/ADXL35X/rawAccY")
+client.subscribe("ADXL355/ADXL35X/rawAccZ")
+client.subscribe("ADXL355/ADXL35X/csv")
+
+client.subscribe("Ambiot/9250/rawAccX")
+client.subscribe("Ambiot/9250/rawAccY")
+client.subscribe("Ambiot/9250/rawAccZ")
+
 
 signal.signal(signal.SIGTERM, handler_stop_signals)
 
