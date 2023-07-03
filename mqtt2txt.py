@@ -18,8 +18,8 @@ files_path = '/home/bmax/mqtt2txt'
 closing = False
 client = None
 
-off_begin = "08:00:00"
-off_end = "19:30:00"
+off_begin = "11:00:00"
+off_end = "12:00:00"
 off_begin_t = datetime.strptime(off_begin, "%H:%M:%S")
 off_end_t = datetime.strptime(off_end, "%H:%M:%S")
 
@@ -130,38 +130,60 @@ client.on_message = on_message           # attach function to callback
 # client.on_disconnect= on_disconnect
 client.connect(broker_address, broker_port, 60)    # connect
 
-client.subscribe("I2S/rawRMS")  # subscribe
-client.subscribe("I2S/v30000")
 
-client.subscribe("MR60/rawRMS")
-client.subscribe("MR60/v30000")
-client.subscribe("MR60/radar/csv")
+#client.subscribe("C3_Test1/radar/csv")
+#client.subscribe("C3_Test1/unknown")
+#client.subscribe("C3_Test1/raw/hrWave")
+#client.subscribe("C3_Test1/raw/respWave")
 
+#client.subscribe("esp32snore/v30000")
+
+
+client.subscribe("RtlADXL/ADXL35X/rawAccX")
+client.subscribe("RtlADXL/ADXL35X/rawAccY")
+client.subscribe("RtlADXL/ADXL35X/rawAccZ")
+client.subscribe("RtlADXL/ADXL35X/csv")
+client.subscribe("RtlADXL/ADXL35X/breath")
+
+client.subscribe("EspADXL/ADXL35X/rawAccX")
+client.subscribe("EspADXL/ADXL35X/rawAccY")
+client.subscribe("EspADXL/ADXL35X/rawAccZ")
+client.subscribe("EspADXL/ADXL35X/csv")
+client.subscribe("EspADXL/ADXL35X/breath")
+
+#client.subscribe("VL53L5CX/VL53L5CX/raw")
+
+client.subscribe("SLEEP4/VL53L5CX/raw")
+client.subscribe("SLEEP4/v30000")
+client.subscribe("SLEEP4/radar/csv")
+#client.subscribe("SLEEP4/raw/respWave")
+#client.subscribe("SLEEP4/raw/hrWave")
+
+client.subscribe("Zero/VL53L5CX/raw")
 client.subscribe("Zero/v30000")
 client.subscribe("Zero/radar/csv")
 
-client.subscribe("esp32snore/v30000")
+client.subscribe("7C9EBD4974B4/ADS1115/value")
+client.subscribe("7C9EBD4974B4/ADS1115/csv")
+client.subscribe("7C9EBD4974B4/ADS1115/brRaw")
+client.subscribe("7C9EBD4974B4/ADS1115/hrRaw")
+client.subscribe("7C9EBD4974B4/ADS1115/brRaw2")
+client.subscribe("7C9EBD4974B4/ADS1115/hrRaw2")
 
-client.subscribe("TestWIT2/WT61/csv")
+client.subscribe("RESMED/ADS1115/value0")
+client.subscribe("RESMED/ADS1115/value1")
+client.subscribe("RESMED/ADS1115/value2")
+client.subscribe("RESMED/ADS1115/value3")
 
-client.subscribe("S3_MPU6500/MPU6500/rawAccX")
-client.subscribe("S3_MPU6500/MPU6500/rawAccY")
-client.subscribe("S3_MPU6500/MPU6500/rawAccZ")
-client.subscribe("S3_MPU6500/MPU6500/rawGyrX")
-client.subscribe("S3_MPU6500/MPU6500/rawGyrY")
-client.subscribe("S3_MPU6500/MPU6500/rawGyrZ")
-client.subscribe("S3_MPU6500/MPU6500/csv")
-client.subscribe("S3_MPU6500/WT61/csv")
+client.subscribe("RESMED/ADS1115/max0")
+client.subscribe("RESMED/ADS1115/max1")
+client.subscribe("RESMED/ADS1115/max2")
+client.subscribe("RESMED/ADS1115/max3")
 
-client.subscribe("ADXL355/ADXL35X/rawAccX")
-client.subscribe("ADXL355/ADXL35X/rawAccY")
-client.subscribe("ADXL355/ADXL35X/rawAccZ")
-client.subscribe("ADXL355/ADXL35X/csv")
-
-client.subscribe("Ambiot/9250/rawAccX")
-client.subscribe("Ambiot/9250/rawAccY")
-client.subscribe("Ambiot/9250/rawAccZ")
-
+client.subscribe("RESMED/ADS1115/stddev0")
+client.subscribe("RESMED/ADS1115/stddev1")
+client.subscribe("RESMED/ADS1115/stddev2")
+client.subscribe("RESMED/ADS1115/stddev3")
 
 signal.signal(signal.SIGTERM, handler_stop_signals)
 
