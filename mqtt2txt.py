@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/bin/python3.11
 
 # place this in /usr/local/lib/mqtt2txt/mqtt2txt.py
 # --------------------------------------
@@ -8,13 +8,13 @@ import paho.mqtt.client as mqttClient
 import os
 import logging
 import signal
-import systemd.daemon
+import cysystemd.daemon
 from pathlib import Path
 from datetime import datetime
 
 
 files = dict()
-files_path = '/home/bmax/mqtt2txt'
+files_path = '/home/vkozlov/mqtt2txt'
 closing = False
 client = None
 
@@ -121,7 +121,7 @@ def handler_stop_signals(signum, frame):
 Connected = False   # global variable for the state of the connection
 
 
-broker_address = "192.168.0.114"  # Broker address
+broker_address = "127.0.0.1"  # Broker address
 broker_port = 1883               # Broker port
 
 client = mqttClient.Client(clean_session=False, client_id='mqtt2txt')
@@ -187,7 +187,7 @@ client.subscribe("RESMED/ADS1115/stddev3")
 
 signal.signal(signal.SIGTERM, handler_stop_signals)
 
-systemd.daemon.notify('READY=1')
+cysystemd.daemon.notify(cysystemd.daemon.Notification.READY)
 
 try:
     client.loop_forever()  # then keep listening forever
@@ -195,4 +195,4 @@ except KeyboardInterrupt:
     pass
 finally:
     close_all()
-
+    
