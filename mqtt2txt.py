@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3.11
+#!/usr/bin/python3.12
 
 # place this in /usr/local/lib/mqtt2txt/mqtt2txt.py
 # --------------------------------------
@@ -14,7 +14,7 @@ from datetime import datetime
 
 
 files = dict()
-files_path = '/home/vkozlov/mqtt2txt'
+files_path = '/home/bmax/mqtt2txt'
 closing = False
 client = None
 
