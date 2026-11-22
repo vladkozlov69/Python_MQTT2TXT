@@ -124,7 +124,7 @@ Connected = False   # global variable for the state of the connection
 broker_address = "127.0.0.1"  # Broker address
 broker_port = 1883               # Broker port
 
-client = mqttClient.Client(clean_session=True, client_id='mqtt2txtV6')
+client = mqttClient.Client(clean_session=True, client_id='mqtt2txtV7')
 client.on_connect = on_connect           # attach function to callback
 client.on_message = on_message           # attach function to callback
 # client.on_disconnect= on_disconnect
@@ -163,8 +163,9 @@ client.subscribe("RtlADXL/ADXL35X/rawAccZ")
 #client.subscribe("Zero/v30000")
 #client.subscribe("Zero/radar/csv")
 
-client.subscribe("RESMED2/ADS1115/value0")
-client.subscribe("RESMED2/ADS1115/value1")
+client.subscribe("RESMED2/XGZP/value")
+client.subscribe("RESMED2/XGZP/rawBr")
+client.subscribe("RESMED2/XGZP/rawHr")
 
 client.subscribe("MPS40/csv")
 client.subscribe("MPS40/ADS1115/value")
@@ -172,9 +173,9 @@ client.subscribe("MPS40/ADS1115/brRaw")
 client.subscribe("MPS40/ADS1115/hrRaw")
 
 client.subscribe("HX710/csv")
-client.subscribe("HX710/ADS1115/value")
-client.subscribe("HX710/ADS1115/brRaw")
-client.subscribe("HX710/ADS1115/hrRaw")
+client.subscribe("HX710/XGZP/value")
+client.subscribe("HX710/XGZP/rawBr")
+client.subscribe("HX710/XGZP/rawHr")
 
 client.subscribe("3CE90E8624C0/csv")
 client.subscribe("3CE90E8624C0/XGZP/value")
